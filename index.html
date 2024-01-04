@@ -48,6 +48,23 @@
             color: #2e7d32; /* Título em verde escuro */
             margin-top: 0;
         }
+        .action-buttons {
+            display: flex; /* Usa flexbox para alinhar os botões lado a lado */
+            justify-content: space-between; /* Espaçamento entre os botões */
+        }
+        .action-buttons button {
+            flex: 1; /* Faz cada botão ocupar metade do espaço */
+            margin: 5px; /* Espaçamento ao redor dos botões */
+            padding: 10px;
+            border-radius: 20px; /* Bordas arredondadas */
+            font-size: 0.9em; /* Reduzindo o tamanho da fonte */
+        }
+        #copyButton {
+            background-color: #4caf50; /* verde escuro para o botão de copiar */
+        }
+        #openButton {
+            background-color: #388e3c; /* um verde diferente para o botão de abrir */
+        }
     </style>
 </head>
 <body>
@@ -58,7 +75,10 @@
         <button onclick="generateLink()">Gerar Link</button>
         <p>Link Gerado:</p>
         <textarea id="generatedLink" readonly></textarea>
-        <button id="copyButton" onclick="copyLink()">Copiar Link</button>
+        <div class="action-buttons">
+            <button id="copyButton" onclick="copyLink()">Copiar Link</button>
+            <button id="openButton" onclick="openLink()">Abrir Link</button>
+        </div>
     </div>
 
     <script>
@@ -71,8 +91,11 @@
             }
 
             var message = encodeURIComponent(document.getElementById('messageText').value);
-            var link = 'https://wa.me/' + number + '?text=' + message;
+            var link = 'https://web.whatsapp.com/send?phone=' + number + '&text=' + message;
             document.getElementById('generatedLink').value = link;
+            
+            // Habilita o botão de abrir link após gerar o link
+            document.getElementById('openButton').disabled = false;
         }
 
         function copyLink() {
@@ -89,6 +112,13 @@
                 copyButton.textContent = "Copiar Link";
                 copyButton.style.backgroundColor = "#4caf50"; /* volta para a cor verde escura original */
             }, 2000);
+        }
+
+        function openLink() {
+            var generatedLink = document.getElementById('generatedLink').value;
+            if(generatedLink) {
+                window.open(generatedLink, '_blank');
+            }
         }
     </script>
 </body>
