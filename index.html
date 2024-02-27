@@ -80,10 +80,10 @@
             <button id="openButton" onclick="openLink()">Abrir Link</button>
         </div>
         <p>Link para usuários de celular gerado :</p>
-        <textarea id="generatedLink" readonly></textarea>
+        <textarea id="generatedLink2" readonly></textarea>
         <div class="action-buttons">
-            <button id="copyButton" onclick="copyLink()">Copiar Link</button>
-            <button id="openButton" onclick="openLink()">Abrir Link</button>
+            <button id="copyButton2" onclick="copyLink()">Copiar Link</button>
+            <button id="openButton2" onclick="openLink()">Abrir Link</button>
         </div>
     </div>
 
@@ -98,25 +98,39 @@
 
             var message = encodeURIComponent(document.getElementById('messageText').value);
             var link = 'https://web.whatsapp.com/send?phone=' + number + '&text=' + message;
+            var link2 = 'https://wa.me/send?phone=' + number + '&text=' + message;
             document.getElementById('generatedLink').value = link;
+            document.getElementById('generatedLink2').value = link2;
             
             // Habilita o botão de abrir link após gerar o link
             document.getElementById('openButton').disabled = false;
+            document.getElementById('openButton2').disabled = false;
         }
 
         function copyLink() {
             var copyText = document.getElementById("generatedLink");
+            var copyText2 = document.getElementById("generatedLink2");
             copyText.select();
+            copyText2.select();
             document.execCommand("copy");
 
             // Mudar o texto e a cor do botão temporariamente
             var copyButton = document.getElementById("copyButton");
             copyButton.textContent = "Link Copiado!";
             copyButton.style.backgroundColor = "#81c784"; /* verde claro para indicar sucesso */
+
+            // Mudar o texto e a cor do botão temporariamente
+            var copyButton2 = document.getElementById("copyButton2");
+            copyButton2.textContent = "Link Copiado!";
+            copyButton2.style.backgroundColor = "#81c784"; /* verde claro para indicar sucesso */
             
             setTimeout(function() {
                 copyButton.textContent = "Copiar Link";
                 copyButton.style.backgroundColor = "#4caf50"; /* volta para a cor verde escura original */
+            }, 2000);
+            setTimeout(function() {
+                copyButton2.textContent = "Copiar Link";
+                copyButton2.style.backgroundColor = "#4caf50"; /* volta para a cor verde escura original */
             }, 2000);
         }
 
@@ -124,6 +138,10 @@
             var generatedLink = document.getElementById('generatedLink').value;
             if(generatedLink) {
                 window.open(generatedLink, '_blank');
+            }
+            var generatedLink2 = document.getElementById('generatedLink2').value;
+            if(generatedLink2) {
+                window.open(generatedLink2, '_blank');
             }
         }
     </script>
